@@ -5,7 +5,7 @@
     // Hàm kết nối
    function db_connect(){
         //CONNECT DATABASE 
-        $username = "sys";                  // Use your username
+        $username = "store_admin";                  // Use your username
         $password = "Quanlybanhang6";             // and your password
         $database = "localhost/qlbhnhom6";   // and the connect string to connect to your database
              
