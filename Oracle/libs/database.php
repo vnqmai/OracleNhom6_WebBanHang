@@ -7,7 +7,7 @@
         //CONNECT DATABASE 
         $username = "store_admin";                  // Use your username
         $password = "Quanlybanhang6";             // and your password
-        $database = "localhost/qlbhnhom6";   // and the connect string to connect to your database
+        $database = "localhost/db11g";   // and the connect string to connect to your database
              
         global $conn;
         $conn = oci_connect($username, $password, $database,'AL32UTF8');

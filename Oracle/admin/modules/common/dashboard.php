@@ -29,13 +29,10 @@
 			</div>
 			<div role="tabpanel" class="tab-pane" id="qlhoadon">
 				<?php include_once ("modules/bill/list.php"); ?>	
-<<<<<<< HEAD
 			</div>
-=======
-			</div>			
->>>>>>> 6845616566c71293e79ff686857f4be37fc9ec2d
 			<div role="tabpanel" class="tab-pane" id="qltaikhoan">
-				<?php include_once ("modules/user/list.php"); ?>	
+				<?php include_once ("modules/user/list.php"); ?>
+				<h3>Danh sách tài khoản</h3>
 			</div>			
 		</div>
 	</div>
