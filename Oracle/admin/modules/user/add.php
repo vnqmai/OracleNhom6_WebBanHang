@@ -9,9 +9,7 @@
   ?>
 <?php 
 	include_once "database/user.php";
-	$status = "";
 	if(is_submit('adduser')){	
-		$error='';
 		$nameErr = "";	
 		$pattern = '#^\(?[\d]{3}\)?-\(?[\d]{2}\)?-[\d]{2}\.[\d]{3}-[\d]{3}$#';
 		$tendn = input_post('tendn');		
@@ -42,13 +40,12 @@
 			$error['email'] = 'Bạn chưa nhập địa chỉ email.';
 		}else if (!is_email($email)){
         	$error['email'] = 'Email không đúng định dạng';
-    	}		
-		
+    	}
+		if(empty($loaitk)){
+			$error['loaitk'] = 'Bạn chưa nhập loại tài khoản.';
+		}	
 		if(!$error){
-				if(insert_TK($tendn,$matkhau,$hoten,$diachi,$sdt,$email,2))
-					$status = "Thành công. <br><a href='".create_link(base_url('admin'), array('m' => 'user', 'a' => 'list'))."'>Trở lại.</a>";
-				else
-					$status = "Thất bại.";
+				echo insert_TK($tendn,$matkhau,$hoten,$diachi,$sdt,$email,$loaitk);
 				echo "<script>";
 				echo "alert('Thêm thành công');";    
 				//echo "history.back()";
@@ -78,7 +75,7 @@
 	  	</div>
 		<div class="form-group">
 	  		<label for="MATKHAU">Mật khẩu</label>
-	  		<input type="password" class="form-control" name="matkhau" id="matkhau" value="<?php echo isset($matkhau) ? $matkhau : ''; ?>">
+	  		<input type="text" class="form-control" name="matkhau" id="matkhau" value="<?php echo isset($matkhau) ? $matkhau : ''; ?>">
 	  		<span class="error">
 	  			<?php 
 	  				if(is_submit('adduser')){
@@ -142,10 +139,20 @@
 	  			 ?>
 	  		</span>
 	  	</div>
+	  	<div class="form-group">
+	  		<label for="LOAITK">Loại tài khoản</label>	
+	  		<select name="loaitk" id="loaitk" class="form-control" required="required">	  			
+	  			<?php 
+	  				$n = count($listloai['IDLOAITK']);
+	  				for ($i = 0; $i < $n;++$i) {
+	  					echo "<option value='".$listloai['IDLOAITK'][$i]."'>".$listloai['TENLOAITK'][$i]."</option>";
+	  				}	  			
+	  			 ?>
+	  		</select>
+	  	</div>
 		<input type="hidden" name="request" value="adduser">	  
 	  	<button type="submit" class="btn btn-primary">Thêm</button>
 	  </form>
-	  <div style="text-align: center;"><?php if($status!="") echo $status; ?></div>
   </div>
 
 <?php 
