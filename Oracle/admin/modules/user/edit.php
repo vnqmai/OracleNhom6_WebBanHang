@@ -4,21 +4,20 @@
 	}
 	include_once "database/user.php";
 	$id = input_get('idtk');
-	$status = "";
 	if(!empty($id)){
 		$taikhoan = get_TK_by_ID($id);
 	}
 	if(is_submit("edituser")){
-		$error = "";	
+		$errorname = "";	
 		$tendn = input_post('tendn');		
 		$matkhau= input_post('matkhau');
 		$hoten = input_post('hoten');
 		$diachi = input_post('diachi');
 		$sdt = input_post('sdt');
 		$email = input_post('email');
-		$loaitk = 2;
+		$loaitk = input_post('loaitk');
 		
-		if(empty($tendn)){
+		if(empty($tendn['tendn'])){
 			$error['tendn'] = 'Bạn chưa nhập tên tài khoản.';
 		}	
 		if(empty($matkhau)){
@@ -37,20 +36,17 @@
 			$error['email'] = 'Bạn chưa nhập địa chỉ email.';
 		}else if (!is_email($email)){
         	$error['email'] = 'Email không đúng định dạng';
-    	}		
+    	}
+		if(empty($loaitk)){
+			$error['loaitk'] = 'Bạn chưa nhập loại tài khoản.';
+		}	
 		if(!$error){									
-				if(update_TK_by_ID($id,$tendn,sha1($matkhau),$hoten,$diachi,$sdt,$email,$loaitk))
-					$status = "Thành công. <br><a href='".create_link(base_url('admin'),array('m' => "user",'a'=>"list" ))."'>Trở lại</a>";
-				else
-					$status = "Thất bại.";
-				// echo "<script>";
-				// echo "alert('Đã lưu thành công');";    
-				// echo "history.back()";
-				// echo "</script>";
+				echo update_TK_by_ID($id,$tendn,$matkhau,$hoten,$diachi,$sdt,$email,$loaitk);
+				echo "<script>";
+				echo "alert('Đã lưu thành công');";    
+				echo "history.back()";
+				echo "</script>";
 			}			
-		}
-		else{
-			$status = "Sai";
 		}
  ?>
  <?php 
@@ -78,7 +74,7 @@
 	  	</div>
 		<div class="form-group">
 	  		<label for="MATKHAU">Mật khẩu</label>
-	  		<input type="password" class="form-control" name="matkhau" id="matkhau" value="<?php echo $taikhoan['MATKHAU'][0]; ?>">
+	  		<input type="text" class="form-control" name="matkhau" id="matkhau" value="<?php echo $taikhoan['MATKHAU'][0]; ?>">
 	  		<span class="error">
 	  			<?php 
 	  				if(is_submit('edituser')){
@@ -143,11 +139,23 @@
 	  				}
 	  			 ?>
 	  		</span>
-	  	</div>	  	
+	  	</div>
+	  	<div class="form-group">
+	  		<label for="LOAITK">Loại tài khoản</label>	  		
+	  		<select name="loaitk" id="loaitk" class="form-control" required="required">	  			
+	  			<?php 
+	  				$n = count($listloai['IDLOAITK']);
+	  				for ($i = 0; $i < $n;++$i) {
+	  					if($listloai['IDLOAITK'][$i] == $taikhoan['IDLOAITK'][0])
+	  						echo "<option value='".$listloai['IDLOAITK'][$i]."' selected>".$listloai['TENLOAITK'][$i]."</option>";
+	  					echo "<option value='".$listloai['IDLOAITK'][$i]."'>".$listloai['TENLOAITK'][$i]."</option>";
+	  				}	  			
+	  			 ?>
+	  		</select>
+	  	</div>
 		<input type="hidden" name="request" value="edituser">	  
 	  	<button type="submit" class="btn btn-primary">Lưu thay đổi</button>
 	  </form>
-	  <div style="text-align: center;"><?php if($status!="") echo $status; ?></div>
   </div>
 
 <?php 

@@ -5,6 +5,20 @@
 	$sql = 'SELECT IDTHUONGHIEU, TENTHUONGHIEU, COUNT(T.TENTHUONGHIEU) AS "COUNTER" FROM THUONGHIEU T, SANPHAM S WHERE T.IDTHUONGHIEU = S.THUONGHIEU GROUP BY TENTHUONGHIEU, IDTHUONGHIEU';
 	$brand = db_get_list($sql);
 
+	$listsp = "";
+	if(isset($_REQUEST['id'])){
+		$id = $_REQUEST['id'];
+	}	
+	if(empty($id))
+		$id = 0;
+	if($id == 0){
+		$sql = 'SELECT * FROM SANPHAM';
+		$listsp = db_get_list($sql);
+	}	
+	else{
+		$sql = 'SELECT * FROM SANPHAM WHERE IDSANPHAM = '.$id;
+		$listsp = db_get_list($sql);
+	}
 
  ?>
 <?php include_once 'header.php'; ?>
@@ -76,21 +90,26 @@
 
 				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
 					<div class="row" id="res">
+						<?php 
+							for($i = 0 ;$i<count($listsp['IDSANPHAM']);++$i){
+						?>						
 						<div class="col-lg-4 col-sm-6">
 							<div class="product-item">
 								<div class="pi-pic">									
-									<img src="./img/product/6.jpg" alt="" style="height: 250px;">
+									<img src="../images/<?php echo $listsp['HINH'][$i]; ?>" alt="" style="height: 250px;">
 									<div class="pi-links">
-										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>										
 									</div>
 								</div>
 								<div class="pi-text">
-									<h6>$35,00</h6>
-									<p>Black and White Stripes Dress</p>
+									<h6><?php echo $listsp['DONGIA'][$i]; ?></h6>
+									<p><?php echo $listsp['TENSANPHAM'][$i]; ?></p>
 								</div>
 							</div>
-						</div>									
+						</div>
+						<?php
+							}
+						 ?>
 						<div class="text-center w-100 pt-3">
 							<button class="site-btn sb-line sb-dark">LOAD MORE</button>
 						</div>
