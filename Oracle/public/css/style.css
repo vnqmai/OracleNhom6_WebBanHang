@@ -815,7 +815,7 @@ ol {
 
 .product-item .pi-pic {
 	position: relative;
-	display: block;
+	display: block;	
 }
 
 .product-item .tag-new,
@@ -922,6 +922,8 @@ ol {
 	color: #111111;
 	margin-bottom: 0;
 }
+
+.ppic{height: 250px;}
 
 /* -----------------------
   Product filter section
