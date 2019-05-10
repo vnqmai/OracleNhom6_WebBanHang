@@ -5,12 +5,12 @@
     // Hàm kết nối
    function db_connect(){
         //CONNECT DATABASE 
-        $username = "sys";                  // Use your username
+        $username = "store_admin";                  // Use your username
         $password = "Quanlybanhang6";             // and your password
-        $database = "localhost/db11g";   // and the connect string to connect to your database
+        $database = "localhost/qlbhnhom6";   // and the connect string to connect to your database
              
         global $conn;
-        $conn = oci_connect($username, $password, $database,'AL32UTF8', OCI_SYSDBA);
+        $conn = oci_connect($username, $password, $database,'AL32UTF8');
         if (!$conn) {
             $m = oci_error();
             trigger_error('Could not connect to database: '. $m['message'], E_USER_ERROR);          
