@@ -38,8 +38,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Tên đăng nhập</th>
-                    <th>Mật khẩu</th>
+                    <th>Tên đăng nhập</th>                    
                     <th>Họ tên</th>
                     <th>Địa chỉ</th> 
                     <th>Số điện thoại</th>
@@ -56,8 +55,7 @@
                         $editlink = create_link(base_url('admin'), array('m' => 'user', 'a' => 'edit', 'idtk' => $users['IDTAIKHOAN'][$i]));
                         $dellink = create_link(base_url('admin'), array('m' => 'user', 'a' => 'delete', 'idtk' => $users['IDTAIKHOAN'][$i]));
                         echo "<tr>";
-                        echo "<td>".$users['TENDN'][$i]."</td>";
-                        echo "<td>".$users['MATKHAU'][$i]."</td>";
+                        echo "<td>".$users['TENDN'][$i]."</td>";                        
                         echo "<td>".$users['HOTEN'][$i]."</td>";
                         echo "<td>".$users['DIACHI'][$i]."</td>";
                         echo "<td>".$users['SODIENTHOAI'][$i]."</td>";

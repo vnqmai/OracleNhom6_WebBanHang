@@ -22,14 +22,14 @@
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="home">
-				<?php include_once "modules/chart/ProductViewChart.php"; ?>
+				 <!-- <?php //include_once "modules/chart/ProductViewChart.php"; ?> -->
 			</div>
 			<div role="tabpanel" class="tab-pane" id="qlsanpham">
 				<?php include_once ("modules/product/list.php"); ?>				
 			</div>
 			<div role="tabpanel" class="tab-pane" id="qlhoadon">
-				<?php include_once ("modules/bill/list.php"); ?>	
-			</div>			
+				<h3>Danh sách hóa đơn</h3>
+			</div>
 			<div role="tabpanel" class="tab-pane" id="qltaikhoan">
 				<?php include_once ("modules/user/list.php"); ?>	
 			</div>			

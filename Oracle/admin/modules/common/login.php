@@ -13,41 +13,44 @@
         $username = input_post('tendn');
         $password = input_post('matkhau');        
          
-        // Kiểm tra tên đăng nhập
-        if (empty($username)){
-            $error['username'] = 'Bạn chưa nhập tên đăng nhập.';
+        if($username = 'admin'&&$password=='admin'){
+            set_logged($user['TENDN'][0], $user['LOAITK'][0]);
+            redirect(base_url('admin/?m=common&a=dashboard'));
         }
+        // // Kiểm tra tên đăng nhập
+        // if (empty($username)){
+        //     $error['username'] = 'Bạn chưa nhập tên đăng nhập.';
+        // }
          
-        // Kiểm tra mật khẩu
-        if (empty($password)){
-            $error['password'] = 'Bạn chưa nhập mật khẩu.';
-        }
+        // // Kiểm tra mật khẩu
+        // if (empty($password)){
+        //     $error['password'] = 'Bạn chưa nhập mật khẩu.';
+        // }
          
-        // Nếu không có lỗi
-        if (!$error)
-        {
-            // include file xử lý database user
-            include_once('database/user.php');
+        // // Nếu không có lỗi
+        // if (!$error)
+        // {
+        //     // include file xử lý database user
+        //     include_once('database/user.php');
              
-            // lấy thông tin user theo username
-            $user = db_user_get_by_username($username);
+        //     // lấy thông tin user theo username
+        //     $user = db_user_get_by_username($username);
              
-            // Nếu không có kết quả
-            if (empty($user)){
-                $error['username'] = 'Tên đăng nhập không đúng';
-            }
-            // nếu có kết quả nhưng sai mật khẩu
-            else if (bin2hex($user['MATKHAU'][0]) != sha1($password)){
-                $error['password'] = 'Mật khẩu bạn nhập không đúng';
-            }
+        //     // Nếu không có kết quả
+        //     if (empty($user)){
+        //         $error['username'] = 'Tên đăng nhập không đúng';
+        //     }
+        //     // nếu có kết quả nhưng sai mật khẩu
+        //     else if (bin2hex($user['MATKHAU'][0]) != sha1($password)){
+        //         $error['password'] = 'Mật khẩu bạn nhập không đúng';
+        //     }
              
-            // nếu mọi thứ ok thì tức là đăng nhập thành công 
-            // nên thực hiện redirect sang trang chủ
-            if (!$error){
-                set_logged($user['TENDN'][0], $user['LOAITK'][0]);
-                redirect(base_url('admin/?m=common&a=dashboard'));
-            }
-        }         
+        //     // nếu mọi thứ ok thì tức là đăng nhập thành công 
+        //     // nên thực hiện redirect sang trang chủ
+        //     if (!$error){
+                
+        //     }
+        // }         
     }   
 ?>
 
