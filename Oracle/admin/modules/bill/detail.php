@@ -63,8 +63,13 @@
 
  ?>
  <?php  include_once "widgets/header.php"; ?>
+<<<<<<< HEAD
  <div class="content">
     <div class="col-md-8 col-md-push-2 col-md-pull-2">
+=======
+ <div class="container">
+
+>>>>>>> 6845616566c71293e79ff686857f4be37fc9ec2d
         <h3 style="text-align: center;">Chi tiết hóa đơn</h3>
         <div class="controls">
 
@@ -74,7 +79,15 @@
                 <div class="form-group">
 
                     <label for="TRANGTHAI">Trạng thái</label>
+<<<<<<< HEAD
                     <input type="text" class="form-control" name="trangthai" id="trangthai"  value="<?php echo $trangthais['TRANGTHAI'][0]; ?>">
+=======
+                    <select class="form-control" name="trangthai" id="trangthai">
+                        <option value="Đã giao" class="<?php if($trangthais['TRANGTHAI'][0]=="Đã giao") echo 'active'; ?>">Đã giao</option>
+                        <option value="Đang giao" class="<?php if($trangthais['TRANGTHAI'][0]=="Đang giao") echo 'active'; ?>">Đang giao</option>                                                
+                    </select>
+                    <!-- <input type="text" class="form-control" name="trangthai" id="trangthai"  value="<?php //echo $trangthais['TRANGTHAI'][0]; ?>"> -->
+>>>>>>> 6845616566c71293e79ff686857f4be37fc9ec2d
                     <span class="error">
                         <?php 
                             if(is_submit('editTrangthai')){
@@ -93,7 +106,11 @@
             </form>
             
 
+<<<<<<< HEAD
         </div>
+=======
+
+>>>>>>> 6845616566c71293e79ff686857f4be37fc9ec2d
         </div>
         <table class="table table-hover">
             <thead>
