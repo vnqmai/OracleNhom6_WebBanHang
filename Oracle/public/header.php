@@ -54,7 +54,24 @@
 						<div class="user-panel">
 							<div class="up-item">
 								<i class="flaticon-profile"></i>
-								<a href="#">Sign In </a> or <a href="#">Create Account</a>
+								<?php 
+									if (session_status() == PHP_SESSION_NONE) {
+    									session_start();
+									}
+									include_once '../libs/database.php';
+									if(isset($_SESSION['username'])){
+									
+								?>
+								
+								<a href="signout.php">Sign Out </a>
+								<?php							
+									}
+									else{
+								?>
+								<a href="signin.php">Sign In </a> or <a href="createAccount.php">Create Account</a>
+								<?php							
+									}
+								?>
 							</div>
 							<div class="up-item">
 								<div class="shopping-card">

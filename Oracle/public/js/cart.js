@@ -14,8 +14,7 @@ $(document).ready(function(){
 		}
 		else{
 			listitem = jQuery.parseJSON(cart);
-			dem = 0;
-			alert('số lượng item '+listitem.length);
+			dem = 0;			
 			for(var i = 0;i<listitem.length;++i){
 				if(listitem[i].id==id){
 					listitem[i].soluong += 1;
@@ -23,13 +22,12 @@ $(document).ready(function(){
 				}
 			}
 			if(dem==0){
-				var newitem = jQuery.parseJSON('{"id":'+id+', "hinh":"'+hinh+'", "ten": "'+ten+'", "dongia": '+dongia+', "soluong":1}');
-				alert("new item: "+newitem.ten);
+				var newitem = jQuery.parseJSON('{"id":'+id+', "hinh":"'+hinh+'", "ten": "'+ten+'", "dongia": '+dongia+', "soluong":1}');				
 				listitem.push(newitem);				
 			}
 			sessionStorage.setItem("cart", JSON.stringify(listitem));
 		}
 
 		// item = jQuery.parseJSON('{"id":'+id+', "hinh":"'+hinh+'", "ten": "'+ten+'", "dongia": '+dongia+', "soluong":1}');							
-	});
+	});	
 });

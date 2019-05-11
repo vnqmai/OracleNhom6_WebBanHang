@@ -17,6 +17,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 order-2 order-lg-1">
+					<?php 
+						
+						include_once '../libs/database.php';
+						if(isset($_SESSION['username'])){
+							$username = $_SESSION['username'];
+							$sql = "SELECT * FROM TAIKHOAN WHERE TENDN = '".$username."'";
+							$user = db_get_list($sql);
+					?>					
 					<form class="checkout-form">
 						<div class="cf-title">Thông tin hóa đơn</div>
 						<div class="row">
@@ -26,36 +34,36 @@
 						</div>
 						<div class="row address-inputs">
 							<div class="col-md-12">
-								<input type="text" placeholder="Họ tên">
-								<input type="text" placeholder="Địa chỉ">
-								<input type="text" placeholder="Số điện thoại">
-								<input type="text" placeholder="Email">
+								<input type="text" placeholder="Họ tên" value="<?php echo($user['HOTEN'][0]); ?>" readonly="true">
+								<input type="text" placeholder="Địa chỉ" value="<?php echo($user['DIACHI'][0]); ?>" readonly="true">
+								<input type="text" placeholder="Số điện thoại" value="<?php echo($user['SODIENTHOAI'][0]); ?>" readonly="true">
+								<input type="text" placeholder="Email" value="<?php echo($user['EMAIL'][0]); ?>" readonly="true">
 							</div>														
 						</div>
-						<button class="site-btn submit-order-btn">Thanh toán</button>
+						<button class="site-btn submit-order-btn" name="checkout" id="checkout">Thanh toán</button>
 					</form>
+					<?php							
+						}
+						else{
+					?>
+					<div class="cf-title">Bạn chưa đăng nhập. <a href="signin.php">Đăng nhập.</a></div>
+					<?php
+						}
+					 ?>
 				</div>
 				<div class="col-lg-4 order-1 order-lg-2">
 					<div class="checkout-cart">
 						<h3>Giỏ hàng</h3>
 						<ul class="product-list" id="res">
-							<!-- <li>
-								<div class="pl-thumb"><img src="img/cart/1.jpg" alt=""></div>
-								<h6>Animal Print Dress</h6>
-								<p>$45.90</p>
-							</li>
-							<li>
-								<div class="pl-thumb"><img src="img/cart/2.jpg" alt=""></div>
-								<h6>Animal Print Dress</h6>
-								<p>$45.90</p>
-							</li> -->
+
 						</ul>
 						<ul class="price-list">														
-							<li class="total">Total<span id="total"></span></li>
+							<li class="total">Tổng bill<span id="total"></span></li>
 						</ul>
 					</div>
 				</div>
 			</div>
+			<div style="text-align: center;" id="res"></div>
 		</div>
 	</section>
 	<!-- checkout section end -->
@@ -68,10 +76,22 @@
 		listitem = jQuery.parseJSON(cart);
 		element=""; total = 0;
 		for(var i = 0;i<listitem.length;++i){
-			element += '<li><div class="pl-thumb"><img src="../images/'+listitem[i].hinh+'" alt=""></div><h6>'+listitem[i].ten+'</h6><p>'+listitem[i].soluong*listitem[i].dongia+'</p></li>'			
+			element += '<li><div class="pl-thumb"><img src="../images/'+listitem[i].hinh+'" alt=""></div><h6>'+listitem[i].ten+'</h6><p>'+listitem[i].soluong*listitem[i].dongia+'</p></li>';			
 			total+= listitem[i].soluong*listitem[i].dongia;
 		}
 		$('#res').html(element);
 		$('#total').text(total);
+
+		$('#checkout').click(function(){
+			$.ajax({
+				type: 'POST',
+				url: 'ajax/checkout.php',
+				data: {data: sessionStorage.getItem('cart')},
+				success: function(response){
+					sessionStorage.clear();
+					alert(response);
+				}
+			});
+		});
 	});
 </script>

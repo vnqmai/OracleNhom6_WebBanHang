@@ -52,12 +52,13 @@
 <?php include_once 'footer.php'; ?>
 
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){	
+	// sessionStorage.clear();			
 		cart = sessionStorage.getItem("cart");
 		listitem = jQuery.parseJSON(cart);
 		element=""; total = 0;
 		for(var i = 0;i<listitem.length;++i){
-			element += '<tr><td class="product-col"><img src="../images/'+listitem[i].hinh+'" alt=""><div class="pc-title"><h4>'+listitem[i].ten+'</h4><p>'+listitem[i].dongia+'</p></div></td><td class="quy-col"><div class="quantity"><div class="pro-qty"><input type="text" value="'+listitem[i].soluong+'"></div></div></td><td class="total-col"><h4>'+listitem[i].soluong*listitem[i].dongia+'</h4></td></tr>'			
+			element += '<tr><td class="product-col"><img src="../images/'+listitem[i].hinh+'" alt=""><div class="pc-title"><h4>'+listitem[i].ten+'</h4><p>'+listitem[i].dongia+'</p></div></td><td class="quy-col"><div class="quantity"><div class="pro-qty"><input type="text" value="'+listitem[i].soluong+'"></div></div></td><td class="total-col"><h4>'+listitem[i].soluong*listitem[i].dongia+'</h4></td></tr>';		
 			total+= listitem[i].soluong*listitem[i].dongia;
 		}
 		$('#res').html(element);
