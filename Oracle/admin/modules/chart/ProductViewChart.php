@@ -1,13 +1,13 @@
-<?php 
-	if (!defined('IN_SITE')) die ('The request not found');
-
+<?php     
+	if (!defined('IN_SITE')) die ('The request not found');    
+    ob_start();
     //tổng lượng view (các sản phẩm) trong 1 ngày --> show chart
     $query1 = "SELECT SUM(SOLUONG) AS SL, NGAY FROM LUONGVIEWSANPHAM GROUP BY NGAY ORDER BY NGAY ASC";
     $charvalue = db_get_list($query1);    
 
     //tổng lượng view (các ngày trong tháng) của 1 sp --> sắp xếp giảm dần --> nhận xét
     // $query2 = "SELECT SUM(SOLUONG) AS SL, SANPHAM FROM LUONGVIEWSANPHAM L, SANPHAM S WHERE L.SANPHAM = S.IDSANPHAM AND TO_CHAR(NGAY,'mm') = '04' GROUP BY L.SANPHAM ORDER BY SL DESC";
-    $query2 = "SELECT SUM(SOLUONG) AS SL, S.TENSANPHAM AS SP FROM LUONGVIEWSANPHAM L, SANPHAM S WHERE L.SANPHAM = S.IDSANPHAM AND TO_CHAR(NGAY,'mm') = '04' GROUP BY S.TENSANPHAM ORDER BY SL DESC";
+    $query2 = "SELECT SUM(SOLUONG) AS SL, S.TENSANPHAM AS SP FROM LUONGVIEWSANPHAM L, SANPHAM S WHERE L.SANPHAM = S.IDSANPHAM AND TO_CHAR(NGAY,'mm') = '05' GROUP BY S.TENSANPHAM ORDER BY SL DESC";
     $comment = db_get_list($query2);
     
     
@@ -70,3 +70,6 @@
 <style type="text/css">
     canvas{}
 </style>
+<?php 
+ob_flush();
+ ?>

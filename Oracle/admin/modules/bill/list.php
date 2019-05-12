@@ -1,10 +1,8 @@
  
 <?php 
-
     if (!is_admin()){
-        redirect(base_url('admin'), array('m' => 'common', 'a' => 'logout'));
+        echo "<script>window.location.href='".create_link(base_url('admin'), array('m' => 'common', 'a' => 'logout'))."'</script>"; 
     }
-
     // Tìm tổng số records    
     $result = db_get_row('SELECT count(hd.idhoadon) AS counter FROM HOADON HD,TAIKHOAN TK WHERE HD.TAIKHOAN=TK.IDTAIKHOAN');
     $total_records = $result["COUNTER"][0];
@@ -33,9 +31,9 @@
  <div class="content">
     <div class="col-md-8 col-md-push-2 col-md-pull-2">
         <h3 style="text-align: center;">Danh sách hóa đơn</h3>
-        <div class="controls">
-            <a class="btn btn-default" href="<?php echo create_link(base_url('admin'), array('m' => 'bill', 'a' => 'add')); ?>">Thêm</a>
-        </div>
+<!--         <div class="controls">
+            <a class="btn btn-default" href="<?php //echo create_link(base_url('admin'), array('m' => 'bill', 'a' => 'add')); ?>">Thêm</a>
+        </div> -->
         <table class="table table-hover">
             <thead>
                 <tr>

@@ -1,10 +1,8 @@
  
-<?php 
-
+<?php     
     if (!is_admin()){
-        redirect(base_url('admin'), array('m' => 'common', 'a' => 'logout'));
+        echo "<script>window.location.href='".create_link(base_url('admin'), array('m' => 'common', 'a' => 'logout'))."'</script>"; 
     }
-
     // Tìm tổng số records    
     $result = db_get_row('SELECT count(IDSANPHAM) AS counter FROM SANPHAM');
     $total_records = $result["COUNTER"][0];

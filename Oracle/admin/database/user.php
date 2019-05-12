@@ -2,7 +2,7 @@
  
 	function db_user_get_by_username($username){
 	    $username = addslashes($username);
-	    $sql = "SELECT * FROM TAIKHOAN where TENDN = '{$username}'";	    
+	    $sql = "SELECT * FROM TAIKHOAN where TENDN = '{$username}' AND LOAITK=1";	    
 	    return db_get_row($sql);
 	}
 

@@ -7,8 +7,9 @@
     }
      
     // BƯỚC 2: NẾU NGƯỜI DÙNG SUBMIT FORM
+    $status = "";
     if (is_submit('login'))
-    {    
+    {                    
         // lấy tên đăng nhập và mật khẩu
         $username = input_post('tendn');
         $password = input_post('matkhau');        
@@ -30,22 +31,26 @@
             include_once('database/user.php');
              
             // lấy thông tin user theo username
-            $user = db_user_get_by_username($username);
-             
+            $user = db_user_get_by_username($username);            
             // Nếu không có kết quả
-            if (empty($user)){
-                $error['username'] = 'Tên đăng nhập không đúng';
+            if (empty($user['IDTAIKHOAN'])){
+                $status = "Đăng nhập thất bại.";
+                $error['username'] = "";
+                $error['password'] = "";
             }
             // nếu có kết quả nhưng sai mật khẩu
-            else if (bin2hex($user['MATKHAU'][0]) != sha1($password)){
-                $error['password'] = 'Mật khẩu bạn nhập không đúng';
-            }
-             
-            // nếu mọi thứ ok thì tức là đăng nhập thành công 
-            // nên thực hiện redirect sang trang chủ
-            if (!$error){
-                set_logged($user['TENDN'][0], $user['LOAITK'][0]);
-                redirect(base_url('admin/?m=common&a=dashboard'));
+            else {
+                if (bin2hex($user['MATKHAU'][0]) != sha1($password)){
+                    $error['username'] = "";
+                    $error['password'] = 'Mật khẩu bạn nhập không đúng';
+                }
+                 
+                // nếu mọi thứ ok thì tức là đăng nhập thành công 
+                // nên thực hiện redirect sang trang chủ
+                if (!$error){
+                    set_logged($user['TENDN'][0], $user['LOAITK'][0]);
+                    redirect(base_url('admin/?m=common&a=dashboard'));
+                }
             }
         }         
     }   
@@ -87,6 +92,7 @@
     <input type="hidden" name="request" value="login">
     <button type="submit" class="btn btn-primary">Đăng nhập</button>
 </form>
+<div style="text-align: center;"><?php if($status!="") echo $status; ?></div>
 <br>
 
 <?php include_once('widgets/footer.php'); ?>
