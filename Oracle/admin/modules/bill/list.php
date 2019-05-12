@@ -1,13 +1,10 @@
  
 <?php 
-
     if (!is_admin()){
-        redirect(base_url('admin'), array('m' => 'common', 'a' => 'logout'));
+        echo "<script>window.location.href='".create_link(base_url('admin'), array('m' => 'common', 'a' => 'logout'))."'</script>"; 
     }
-
     // Tìm tổng số records    
-    $result = db_get_row('SELECT count(hd.idhoadon) AS counter FROM HOADON HD, CHITIETHOADON CT, TAIKHOAN TK, SANPHAM SP
-        WHERE HD.IDHOADON = CT.HOADON AND HD.TAIKHOAN=TK.IDTAIKHOAN AND CT.SANPHAM=SP.IDSANPHAM');
+    $result = db_get_row('SELECT count(hd.idhoadon) AS counter FROM HOADON HD,TAIKHOAN TK WHERE HD.TAIKHOAN=TK.IDTAIKHOAN');
     $total_records = $result["COUNTER"][0];
 
      
@@ -27,26 +24,23 @@
     $paging = paging($link, $total_records, $current_page, $limit);
 
     // Lấy danh sách Sản phẩm    
-    $bills = db_get_list("SELECT * FROM HOADON HD, CHITIETHOADON CT, TAIKHOAN TK, SANPHAM SP
-        WHERE HD.IDHOADON = CT.HOADON AND HD.TAIKHOAN=TK.IDTAIKHOAN AND CT.SANPHAM=SP.IDSANPHAM");
+    $bills = db_get_list("SELECT * FROM HOADON HD,TAIKHOAN TK WHERE HD.TAIKHOAN=TK.IDTAIKHOAN");
 
  ?>
  <?php  include_once "widgets/header.php"; ?>
  <div class="content">
     <div class="col-md-8 col-md-push-2 col-md-pull-2">
         <h3 style="text-align: center;">Danh sách hóa đơn</h3>
-        <div class="controls">
-            <a class="btn btn-default" href="<?php echo create_link(base_url('admin'), array('m' => 'bill', 'a' => 'add')); ?>">Thêm</a>
-        </div>
+<!--         <div class="controls">
+            <a class="btn btn-default" href="<?php //echo create_link(base_url('admin'), array('m' => 'bill', 'a' => 'add')); ?>">Thêm</a>
+        </div> -->
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Ngày</th>
                     <th>Trạng thái</th>
                     <th>Tên khách hàng</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng</th> 
-                    <th>Thành tiền</th>
+                    <th></th>
                     <th></th>           
                     <th></th>           
                 </tr>
@@ -57,16 +51,18 @@
                     for($i = $paging['start'];$i< count($bills['IDHOADON']);++$i){
                         if($dem==$paging['limit'])
                             break;
-                        $editlink = create_link(base_url('admin'), array('m' => 'bill', 'a' => 'edit', 'idct' => $bills['IDCHITIETHD'][$i]));
-                        $dellink = create_link(base_url('admin'), array('m' => 'bill', 'a' => 'delete', 'idct' => $bills['IDCHITIETHD'][$i]));
+                        //$editlink = create_link(base_url('admin'), array('m' => 'bill', 'a' => 'edit', 'idhd' => $bills['IDHOADON'][$i]));
+                        $dellink = create_link(base_url('admin'), array('m' => 'bill', 'a' => 'delete', 'idhd' => $bills['IDHOADON'][$i]));
+                        $detail_link = create_link(base_url('admin'), array('m' => 'bill', 'a' => 'detail', 'idhd' => $bills['IDHOADON'][$i]));
                         echo "<tr>";
                         echo "<td>".$bills['NGAYLAP'][$i]."</td>";
                         echo "<td>".$bills['TRANGTHAI'][$i]."</td>";
                         echo "<td>".$bills['HOTEN'][$i]."</td>";
-                        echo "<td>".$bills['TENSANPHAM'][$i]."</td>";
-                        echo "<td>".$bills['SOLUONG'][$i]."</td>";
-                        echo "<td>".$bills['THANHTIEN'][$i]."</td>";
-                        echo "<td><a href='{$editlink}'>Sửa<a/></td>";
+                        //echo "<td>".$bills['TENSANPHAM'][$i]."</td>";
+                        //echo "<td>".$bills['SOLUONG'][$i]."</td>";
+                        //echo "<td>".$bills['THANHTIEN'][$i]."</td>";
+                        echo "<td><a href='{$detail_link}'>Chi tiết<a/></td>";
+                        //echo "<td><a href='{$editlink}'>Sửa<a/></td>";
                         echo "<td><a href='{$dellink}'>Xóa<a/></td>";
                         echo "</tr>";
                         ++$dem;

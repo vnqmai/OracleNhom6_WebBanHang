@@ -1,10 +1,8 @@
  
-<?php 
-
+<?php     
     if (!is_admin()){
-        redirect(base_url('admin'), array('m' => 'common', 'a' => 'logout'));
+        echo "<script>window.location.href='".create_link(base_url('admin'), array('m' => 'common', 'a' => 'logout'))."'</script>"; 
     }
-
     // Tìm tổng số records    
     $result = db_get_row('SELECT count(IDSANPHAM) AS counter FROM SANPHAM');
     $total_records = $result["COUNTER"][0];
@@ -32,7 +30,7 @@
  <?php  include_once "widgets/header.php"; ?>
  <div class="content">
     <div class="col-md-8 col-md-push-2 col-md-pull-2">
-        <h3 style="text-align: center;">Danh sách thành viên</h3>
+        <h3 style="text-align: center;">Danh sách sản phẩm</h3>
         <div class="controls">
             <a class="btn btn-default" href="<?php echo create_link(base_url('admin'), array('m' => 'product', 'a' => 'add')); ?>">Thêm</a>
         </div>

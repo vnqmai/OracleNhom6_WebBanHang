@@ -2,7 +2,7 @@
  
 	function db_user_get_by_username($username){
 	    $username = addslashes($username);
-	    $sql = "SELECT * FROM TAIKHOAN where TENDN = '{$username}'";	    
+	    $sql = "SELECT * FROM TAIKHOAN where TENDN = '{$username}' AND LOAITK=1";	    
 	    return db_get_row($sql);
 	}
 
@@ -16,9 +16,9 @@
 		return db_get_row("SELECT * FROM TAIKHOAN WHERE IDTAIKHOAN =".$id);
 	}
 	function update_TK_by_ID($id,$tendn,$matkhau,$hoten,$diachi,$sdt,$email,$loaitk){
-		return execute("UPDATE TAIKHOAN SET TENDN = N'".$tendn."', MATKHAU = '".sha1($matkhau)."', HOTEN = N'".$hoten."', DIACHI = N'".$diachi."', SODIENTHOAI = '".($sdt)."', EMAIL = '".($email)."', LOAITK = ".intval($loaitk)." WHERE IDTAIKHOAN = '.($id).'");
+		return execute("UPDATE TAIKHOAN SET TENDN = N'".$tendn."', MATKHAU = '".$matkhau."', HOTEN = N'".$hoten."', DIACHI = N'".$diachi."', SODIENTHOAI = '".($sdt)."', EMAIL = '".($email)."', LOAITK = ".intval($loaitk)." WHERE IDTAIKHOAN = ".$id);
 	}
 	function is_email($str) {
-    return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
+    	return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
 	}
 ?>

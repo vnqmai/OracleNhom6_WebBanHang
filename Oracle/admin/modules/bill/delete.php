@@ -3,14 +3,14 @@
         redirect(base_url('admin'), array('m' => 'common', 'a' => 'logout'));
     }
     include_once "database/bill.php";
-	$id = input_get('idct');
+	$id = input_get('idhd');
 	if(!empty($id)){
 		$status = delete_BIL_by_ID($id);
 		if($status == false)
 			echo "Lỗi";
 		else{
 			echo "Thành công.";
-			sleep(5);
+			sleep(1);
 			redirect(base_url('admin'), array('m' => 'common', 'a' => 'dashboard'));
 		}		
 	}
