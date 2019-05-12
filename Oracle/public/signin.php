@@ -1,6 +1,7 @@
+<?php include_once 'header.php'; ?>
 <?php 
 	include_once '../libs/database.php';
-	session_start();
+	// session_start();
 	$status = "";
 	if(isset($_POST['submit'])){
 		$tendn = $_POST['username'];
@@ -11,7 +12,8 @@
 			if(bin2hex($user['MATKHAU'][0])==sha1($matkhau)){				
 				$_SESSION['username'] = $tendn;
 				$_SESSION['iduser'] = $user['IDTAIKHOAN'][0];
-				$status = "Thành công. <br><a href='#' onclick='history.back();'>Trở về.</a>";
+				$status = "Thành công. <br><a href='index.php'>Trở về trang chủ</a>";
+				header('Location: index.php');
 			}			
 			else
 				$status = "Mật khẩu không đúng.";
@@ -20,7 +22,6 @@
 			$status = "Thất bại.";
 	}
  ?>
-<?php include_once 'header.php'; ?>
 <div class="container">
 	<div class="row">
 		<form action="" method="POST" role="form" style="margin: auto;">
@@ -33,7 +34,7 @@
 		
 			<div class="form-group">
 				<label for="">Mật khẩu</label>
-				<input type="text" class="form-control" id="password" name="password">
+				<input type="password" class="form-control" id="password" name="password">
 			</div>	
 		
 			<button type="submit" class="btn btn-primary" id="submit" name="submit">Đăng nhập</button>

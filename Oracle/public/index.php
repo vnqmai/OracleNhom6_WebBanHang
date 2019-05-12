@@ -7,6 +7,7 @@
 	$sql = 'SELECT * FROM LOAISANPHAM';
 	$filter = db_get_list($sql);
  ?>
+
 <?php include_once('header.php'); ?>
 	<!-- Hero section -->
 	<section class="hero-section">
@@ -15,17 +16,16 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-6 col-lg-7 text-white">
-							<span>New Arrivals</span>
-							<h2>denim jackets</h2>
+							<span>Mới về</span>
+							<h2>Giày dép cao cấp</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-							<a href="#" class="site-btn sb-line">DISCOVER</a>
-							<a href="#" class="site-btn sb-white">ADD TO CART</a>
+							<a href="category.php" class="site-btn sb-line">XEM NGAY</a>							
 						</div>
 					</div>
 					<div class="offer-card text-white">
-						<span>from</span>
-						<h2>$29</h2>
-						<p>SHOP NOW</p>
+						<span>chỉ từ</span>
+						<h2>300k</h2>
+						<p>MUA NGAY</p>
 					</div>
 				</div>
 			</div>
@@ -36,8 +36,7 @@
 							<span>New Arrivals</span>
 							<h2>denim jackets</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-							<a href="#" class="site-btn sb-line">DISCOVER</a>
-							<a href="#" class="site-btn sb-white">ADD TO CART</a>
+							<a href="category.php" class="site-btn sb-line">XEM NGAY</a>							
 						</div>
 					</div>
 					<div class="offer-card text-white">
@@ -65,7 +64,7 @@
 						<div class="feature-icon">
 							<img src="img/icons/1.png" alt="#">
 						</div>
-						<h2>Fast Secure Payments</h2>
+						<h2>Thanh toán nhanh</h2>
 					</div>
 				</div>
 				<div class="col-md-4 p-0 feature">
@@ -73,7 +72,7 @@
 						<div class="feature-icon">
 							<img src="img/icons/2.png" alt="#">
 						</div>
-						<h2>Premium Products</h2>
+						<h2>Sản phẩm chất lượng</h2>
 					</div>
 				</div>
 				<div class="col-md-4 p-0 feature">
@@ -81,7 +80,7 @@
 						<div class="feature-icon">
 							<img src="img/icons/3.png" alt="#">
 						</div>
-						<h2>Free & fast Delivery</h2>
+						<h2>Giao hàng tận nơi</h2>
 					</div>
 				</div>
 			</div>
@@ -94,7 +93,7 @@
 	<section class="top-letest-product-section">
 		<div class="container">
 			<div class="section-title">
-				<h2>LATEST PRODUCTS</h2>
+				<h2>SẢN PHẨM MỚI NHẤT</h2>
 			</div>
 			<div class="product-slider owl-carousel">
 				<?php 
@@ -104,7 +103,7 @@
 					<div class="pi-pic">
 						<img src="../images/<?php echo($latest['HINH'][$i]); ?>" alt="" style="height: 300px;">
 						<div class="pi-links">
-							<a href="#" class="add-card" value="<?php echo $latest['IDSANPHAM'][$i]; ?>"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>											
+							<a style="cursor: pointer;" class="add-card" value="<?php echo $latest['IDSANPHAM'][$i]; ?>"><i class="flaticon-bag"></i><span>THÊM VÀO GIỎ</span></a>											
 						</div>
 					</div>
 					<div class="pi-text">
@@ -126,7 +125,7 @@
 	<section class="product-filter-section">
 		<div class="container">
 			<div class="section-title">
-				<h2>BROWSE TOP SELLING PRODUCTS</h2>
+				<h2>SẢN PHẨM BÁN CHẠY</h2>
 			</div>
 			<ul class="product-filter-menu">
 				<?php 
@@ -146,7 +145,7 @@
 						<div class="pi-pic">
 							<img src="../images/<?php echo $bestsell['HINH'][$i]; ?>" alt="" style="height: 300px;">
 							<div class="pi-links">
-								<a href="#" class="add-card" value="<?php echo $bestsell['IDSANPHAM'][$i]; ?>"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a style="cursor: pointer;" class="add-card" value="<?php echo $bestsell['IDSANPHAM'][$i]; ?>"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
 								
 							</div>
 						</div>
@@ -161,7 +160,7 @@
 				  ?>							
 			</div>
 			<div class="text-center pt-5">
-				<button class="site-btn sb-line sb-dark" onclick="window.location.href = 'category.php';">LOAD MORE</button>
+				<button class="site-btn sb-line sb-dark" onclick="window.location.href = 'category.php';">XEM THÊM</button>
 			</div>
 		</div>
 	</section>
@@ -173,9 +172,9 @@
 		<div class="container">
 			<div class="banner set-bg" data-setbg="img/banner-bg.jpg">
 				<div class="tag-new">NEW</div>
-				<span>New Arrivals</span>
-				<h2>STRIPED SHIRTS</h2>
-				<a href="#" class="site-btn">SHOP NOW</a>
+				<span>SẢN PHẨM MỚI NHẬP</span>
+				<h2>GIÀY THỂ THAO</h2>
+				<a href="category.php" class="site-btn">XEM NGAY</a>
 			</div>
 		</div>
 	</section>

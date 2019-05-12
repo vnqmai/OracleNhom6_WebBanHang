@@ -29,9 +29,10 @@
 			</div>
 			<div role="tabpanel" class="tab-pane" id="qlhoadon">
 				<?php include_once ("modules/bill/list.php"); ?>	
-			</div>			
+			</div>
 			<div role="tabpanel" class="tab-pane" id="qltaikhoan">
-				<?php include_once ("modules/user/list.php"); ?>	
+				<?php include_once ("modules/user/list.php"); ?>
+				
 			</div>			
 		</div>
 	</div>

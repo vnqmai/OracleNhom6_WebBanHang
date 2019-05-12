@@ -25,7 +25,7 @@
 		</div>
 		<div class="pi-text">
 			<h6><?php echo($list['DONGIA'][$i]); ?></h6>
-			<p><a href="product.php?id=<?php echo $list['IDSANPHAM'][$i]; ?>"><?php echo($list['TENSANPHAM'][$i]); ?></a></p>
+			<p><a href="product.php?id=<?php echo $list['IDSANPHAM'][$i]; ?>" class="confirmLink"><?php echo($list['TENSANPHAM'][$i]); ?></a></p>
 		</div>
 	</div>
 </div>
@@ -33,4 +33,5 @@
 	}
 ?>
 <!-- END FILTER WITH CATEGORY -->
+
 <script src="js/cart.js"></script>

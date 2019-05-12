@@ -4,8 +4,8 @@
 		<div class="container">
 			<h4>Thanh toán</h4>
 			<div class="site-pagination">
-				<a href="">Home</a> /
-				<a href="">Checkout</a>
+				<a href="">Trang chủ</a> /
+				<a href="">Thanh toán</a>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 			<div class="row">
 				<div class="col-lg-8 order-2 order-lg-1">
 					<?php 
-						session_start();
+						// session_start();
 						include_once '../libs/database.php';
 						if(isset($_SESSION['username'])){
 							$username = $_SESSION['username'];
@@ -39,9 +39,10 @@
 								<input type="text" placeholder="Số điện thoại" value="<?php echo($user['SODIENTHOAI'][0]); ?>" readonly="true">
 								<input type="text" placeholder="Email" value="<?php echo($user['EMAIL'][0]); ?>" readonly="true">
 							</div>														
-						</div>
-						<button class="site-btn submit-order-btn" name="checkout" id="checkout">Thanh toán</button>
+						</div>						
 					</form>
+					<button class="site-btn submit-order-btn" name="checkout" id="checkout">Thanh toán</button>
+					<div style="text-align: center;" id="ress"></div>
 					<?php							
 						}
 						else{
@@ -62,9 +63,9 @@
 						</ul>
 					</div>
 				</div>
-			</div>
-			<div style="text-align: center;" id="res"></div>
+			</div>			
 		</div>
+		
 	</section>
 	<!-- checkout section end -->
 
@@ -75,12 +76,17 @@
 		cart = sessionStorage.getItem("cart");
 		listitem = jQuery.parseJSON(cart);
 		element=""; total = 0;
-		for(var i = 0;i<listitem.length;++i){
-			element += '<li><div class="pl-thumb"><img src="../images/'+listitem[i].hinh+'" alt=""></div><h6>'+listitem[i].ten+'</h6><p>'+listitem[i].soluong*listitem[i].dongia+'</p></li>';			
-			total+= listitem[i].soluong*listitem[i].dongia;
+		if(listitem==null){
+			$('#total').text('0');
 		}
-		$('#res').html(element);
-		$('#total').text(total);
+		else{
+			for(var i = 0;i<listitem.length;++i){
+				element += '<li><div class="pl-thumb"><img src="../images/'+listitem[i].hinh+'" alt=""></div><h6>'+listitem[i].ten+'</h6><p>'+listitem[i].soluong*listitem[i].dongia+'</p></li>';			
+				total+= listitem[i].soluong*listitem[i].dongia;
+			}
+			$('#res').html(element);
+			$('#total').text(total);
+		}		
 
 		$('#checkout').click(function(){
 			$.ajax({
@@ -89,7 +95,7 @@
 				data: {data: sessionStorage.getItem('cart')},
 				success: function(response){
 					sessionStorage.clear();
-					alert(response);
+					$('#ress').html(response);					
 				}
 			});
 		});

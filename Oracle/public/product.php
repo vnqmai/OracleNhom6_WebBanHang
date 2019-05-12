@@ -79,25 +79,41 @@
 			ten = $('.p-title').text();
 			dongia = $('.p-price').text();
 			sl = $('.pro-qty').find('input').val();		
+			cart = sessionStorage.getItem('cart');
+			listitem = jQuery.parseJSON(cart);
 			if(cart == null){
 				sessionStorage.setItem("cart", '[{"id":'+id+', "hinh":"'+hinh+'", "ten": "'+ten+'", "dongia": '+dongia+', "soluong":'+sl+'}]');
 			}
-			else{
-				listitem = jQuery.parseJSON(cart);
+			else{				
 				dem = 0;
 				
 				for(var i = 0;i<listitem.length;++i){
 					if(listitem[i].id==id){
-						listitem[i].soluong += sl;
+						listitem[i].soluong = parseInt(listitem[i].soluong) + parseInt(sl);
 						++dem;						
 					}
 				}
 				if(dem==0){
-					var newitem = jQuery.parseJSON('{"id":'+id+', "hinh":"'+hinh+'", "ten": "'+ten+'", "dongia": '+dongia+', "soluong":'+sl+'}');
-					alert("new item: "+newitem.ten);
+					var newitem = jQuery.parseJSON('{"id":'+id+', "hinh":"'+hinh+'", "ten": "'+ten+'", "dongia": '+dongia+', "soluong":'+sl+'}');					
 					listitem.push(newitem);				
 				}
 				sessionStorage.setItem("cart", JSON.stringify(listitem));
-			}		
+			}	
+			$('.shopping-card').find('span').text(listitem.length);					
+			$( "#dialog-confirm" ).dialog({		
+		      resizable: false,
+		      height: "auto",
+		      width: 400,
+		      modal: true,
+		      buttons: {
+		        "Xem giỏ hàng": function() {
+		          window.location.href = 'checkout.php';
+		        },
+		        "Đóng": function() {
+		          $( this ).dialog( "close" );
+		        }
+		      }	      
+		    });
+		    $('#dialog-confirm').find('p').css('display','block');
 		});
 	</script>

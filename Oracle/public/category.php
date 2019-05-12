@@ -25,10 +25,10 @@
 	<!-- Page info -->
 	<div class="page-top-info">
 		<div class="container">
-			<h4>Shop PAge</h4>
+			<h4>Sản phẩm</h4>
 			<div class="site-pagination">
-				<a href="">Home</a> /
-				<a href="">Shop</a> /
+				<a href="">Trang chủ</a> /
+				<a href="">Sản phẩm</a> /
 			</div>
 		</div>
 	</div>
@@ -98,12 +98,12 @@
 								<div class="pi-pic">									
 									<img src="../images/<?php echo $listsp['HINH'][$i]; ?>" alt="" style="height: 250px;">
 									<div class="pi-links">
-										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>										
+										<a style="cursor: pointer;" class="add-card" value="<?php echo $listsp['IDSANPHAM'][$i]; ?>"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>										
 									</div>
 								</div>
 								<div class="pi-text">
 									<h6><?php echo $listsp['DONGIA'][$i]; ?></h6>
-									<p><?php echo $listsp['TENSANPHAM'][$i]; ?></p>
+									<p><a href="product.php?id=<?php echo $listsp['IDSANPHAM'][$i]; ?>"><?php echo $listsp['TENSANPHAM'][$i]; ?></a></p>
 								</div>
 							</div>
 						</div>
@@ -111,7 +111,7 @@
 							}
 						 ?>
 						<div class="text-center w-100 pt-3">
-							<button class="site-btn sb-line sb-dark">LOAD MORE</button>
+							<button class="site-btn sb-line sb-dark">XEM THÊM</button>
 						</div>
 					</div>
 				</div>
@@ -154,3 +154,4 @@
 	});	
 	
 </script>
+
