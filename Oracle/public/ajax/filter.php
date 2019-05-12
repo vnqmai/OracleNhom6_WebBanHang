@@ -2,15 +2,15 @@
 <?php 
 	include_once('../../libs/database.php');
 	if(isset($_POST['category'])){
-		$sql = 'SELECT * FROM SANPHAM WHERE LOAISP = '.intval($_POST['category']);
+		$sql = 'SELECT * FROM SANPHAM WHERE LOAISP = '.intval($_POST['category']).' AND SOLUONGCON > 0';
 		$list = db_get_list($sql);		
 	}
 	else if(isset($_POST['gender'])){
-		$sql = "SELECT * FROM SANPHAM WHERE GIOITINH = N'".$_POST['gender']."'";		
+		$sql = "SELECT * FROM SANPHAM WHERE GIOITINH = N'".$_POST['gender']."'".' AND SOLUONGCON > 0';		
 		$list = db_get_list($sql);
 	}
 	else if(isset($_POST['brand'])){
-		$sql = "SELECT * FROM SANPHAM WHERE THUONGHIEU = ".$_POST['brand'];		
+		$sql = "SELECT * FROM SANPHAM WHERE THUONGHIEU = ".$_POST['brand'].' AND SOLUONGCON > 0';		
 		$list = db_get_list($sql);	
 	}
 	for($i = 0;$i<count($list['IDSANPHAM']);++$i){		

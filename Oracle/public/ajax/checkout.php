@@ -17,14 +17,17 @@
 		else
 			$status = 'Chưa đăng nhập.';
 
-		$sql = "INSERT INTO HOADON VALUES((select max(IDHOADON)+1 from HOADON),(SELECT SYSDATE FROM DUAL),N'Đang giao',".$_SESSION['iduser'].")";
+		$sql = "INSERT INTO HOADON VALUES((select max(IDHOADON)+1 from HOADON),(SELECT SYSDATE FROM DUAL),N'Đang giao',".$_SESSION['iduser'].")";		
 		if(execute($sql)){				
 			$e = 0;
 			for($i = 0;$i<count($data);++$i){
-				if(execute("INSERT INTO CHITIETHOADON VALUES((select max(IDCHITIETHD)+1 from CHITIETHOADON),'".$data[$i]['id']."',".$data[$i]['soluong'].",".$data[$i]['soluong']*$data[$i]['dongia'].",(select max(IDHOADON)+1 from HOADON))"))
+				if(execute('UPDATE SANPHAM SET SOLUONGCON = SOLUONGCON -'.intval($data[$i]['soluong']).', SOLUONGDABAN = SOLUONGDABAN + '.intval($data[$i]['soluong']).' WHERE IDSANPHAM = '.$data[$i]['id']))
+				{
+					if(execute("INSERT INTO CHITIETHOADON VALUES((select max(IDCHITIETHD)+1 from CHITIETHOADON),'".$data[$i]['id']."',".$data[$i]['soluong'].",".$data[$i]['soluong']*$data[$i]['dongia'].",(select max(IDHOADON) from HOADON))"))
 							continue;
-				else
-					$e = 1;									
+					else
+						$e = 1;									
+				}				
 			}
 			if($e!=0){
 				$status = "Thêm chi tiết hóa đơn thất bại.";

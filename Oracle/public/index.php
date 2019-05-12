@@ -1,8 +1,8 @@
 <?php 
 	include_once '../libs/database.php';
-	$sql = 'SELECT * FROM SANPHAM ORDER BY IDSANPHAM DESC';
+	$sql = 'SELECT * FROM SANPHAM WHERE SOLUONGCON > 0 ORDER BY IDSANPHAM DESC';
 	$latest = db_get_list($sql);
-	$sql = 'SELECT * FROM SANPHAM ORDER BY SOLUONGDABAN DESC';
+	$sql = 'SELECT * FROM SANPHAM WHERE SOLUONGCON > 0  ORDER BY SOLUONGDABAN DESC';
 	$bestsell = db_get_list($sql);
 	$sql = 'SELECT * FROM LOAISANPHAM';
 	$filter = db_get_list($sql);
@@ -138,7 +138,7 @@
 			</ul>
 			<div class="row">
 				<?php 				
-					for($i = 0;$i<8;++$i){						
+					for($i = 0;$i<count($bestsell['IDSANPHAM']);++$i){						
 				 ?>
 				 <div class="col-lg-3 col-sm-6">
 					<div class="product-item">
