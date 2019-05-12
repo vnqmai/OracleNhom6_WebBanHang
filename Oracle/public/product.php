@@ -9,6 +9,7 @@
 	$mota = $sp['MOTA'][0];
 	$hovergallery = $sp['HOVERGALLERY'][0];
 	$hover = explode('*',$hovergallery);	
+	$slcon = $sp['SOLUONGCON'][0];
  ?>
 <?php include_once 'header.php'; ?>
 	<!-- Page info -->
@@ -46,12 +47,15 @@
 				</div>
 				<div class="col-lg-6 product-details">
 					<h2 class="p-title"><?php echo $ten; ?></h2>
-					<h3 class="p-price"><?php echo $gia; ?></h3>							
+					<h3 class="p-price"><?php echo $gia; ?></h3>	
+					<h4 class="p-stock">Tình trạng: <span><?php if($slcon>0) echo "Còn hàng"; else echo "Hết hàng"; ?></span></h4>	
+					<?php if($slcon>0){ ?>
 					<div class="quantity">
 						<p>Số lượng</p>
                         <div class="pro-qty"><input type="text" value="1"></div>
-                    </div>
-					<a href="#" class="site-btn" id="add-card" value="<?php echo $id; ?>">SHOP NOW</a>
+                    </div>                    
+					<a style="cursor: pointer;" class="site-btn" id="add-card" value="<?php echo $id; ?>">MUA NGAY</a>
+					<?php } ?>
 					<div id="accordion" class="accordion-area">
 						<div class="panel">
 							<div class="panel-header" id="headingOne">

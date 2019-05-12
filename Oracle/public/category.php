@@ -2,7 +2,7 @@
 	include_once('../libs/database.php');
 	$sql = 'SELECT * FROM LOAISANPHAM';
 	$filter = db_get_list($sql);
-	$sql = 'SELECT IDTHUONGHIEU, TENTHUONGHIEU, COUNT(T.TENTHUONGHIEU) AS "COUNTER" FROM THUONGHIEU T, SANPHAM S WHERE T.IDTHUONGHIEU = S.THUONGHIEU GROUP BY TENTHUONGHIEU, IDTHUONGHIEU';
+	$sql = 'SELECT IDTHUONGHIEU, TENTHUONGHIEU, COUNT(T.TENTHUONGHIEU) AS "COUNTER" FROM THUONGHIEU T, SANPHAM S WHERE T.IDTHUONGHIEU = S.THUONGHIEU AND S.SOLUONGCON>0 GROUP BY TENTHUONGHIEU, IDTHUONGHIEU';
 	$brand = db_get_list($sql);
 
 	$listsp = "";
@@ -12,11 +12,11 @@
 	if(empty($id))
 		$id = 0;
 	if($id == 0){
-		$sql = 'SELECT * FROM SANPHAM';
+		$sql = 'SELECT * FROM SANPHAM WHERE SOLUONGCON > 0';
 		$listsp = db_get_list($sql);
 	}	
 	else{
-		$sql = 'SELECT * FROM SANPHAM WHERE IDSANPHAM = '.$id;
+		$sql = 'SELECT * FROM SANPHAM WHERE IDSANPHAM = '.$id.' AND SOLUONGCON > 0';
 		$listsp = db_get_list($sql);
 	}
 
@@ -55,25 +55,7 @@
 							 ?>
 						</ul>
 					</div>
-					<div class="filter-widget mb-0">
-						<h2 class="fw-title">Lọc theo</h2>
-						<div class="price-range-wrap">
-							<h4>Đơn giá</h4>
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="0" data-max="30000000">
-								<div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div>
-								<span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;">
-								</span>
-								<span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;">
-								</span>
-							</div>
-							<div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
-                                </div>
-                            </div>
-                        </div>
-					</div>					
+							
 					<div class="filter-widget">
 						<h2 class="fw-title">Thương hiệu</h2>
 						<ul class="category-menu" id="brand-filter">
