@@ -6,8 +6,8 @@
 	}
 	 
 	// Hàm redirect
-	function redirect($url){
-	    header("Location:{$url}");
+	function redirect($url){		
+	    header("Location:{$url}",true,301);
 	    exit();
 	}
 	 

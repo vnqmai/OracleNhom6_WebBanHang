@@ -54,10 +54,12 @@
   ?>
   <?php 
 	include_once "widgets/header.php";
+	echo "UPDATE HOADON SET NGAYLAP = '{$ngaylap}', TRANGTHAI = '{$trangthai}', TAIKHOAN = {$taikhoan} WHERE IDHOADON = {$idhd}";
  ?>
   <div class="col-md-8 col-md-push-2 col-md-pull-2">
   	<form action="<?php echo '?m=product&a=edit&idsp='.$id; ?>" method="POST" role="form" enctype="multipart/form-data">
 	  	<legend>Thêm sản phẩm</legend>
+
 	  
 	  	<div class="form-group">
 	  		<label for="TENSP">Tên sản phẩm</label>

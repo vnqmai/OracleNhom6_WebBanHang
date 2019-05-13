@@ -28,11 +28,11 @@
 				<?php include_once ("modules/product/list.php"); ?>				
 			</div>
 			<div role="tabpanel" class="tab-pane" id="qlhoadon">
-				<h3>Danh sách hóa đơn</h3>
+				<?php include_once ("modules/bill/list.php"); ?>	
 			</div>
 			<div role="tabpanel" class="tab-pane" id="qltaikhoan">
-				<h3>Danh sách tài khoản</h3>
-				<?php include_once ("modules/user/list.php"); ?>	
+				<?php include_once ("modules/user/list.php"); ?>
+				
 			</div>			
 		</div>
 	</div>
